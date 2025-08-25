@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Счета{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Список счетов</h2>
+    <table>
+      <tr><th>ID</th><th>Ученик</th><th>Сумма</th><th>Статус</th><th>Срок</th></tr>
+      {% for inv in invoices %}
+      <tr>
+        <td>#{{ inv.id }}</td>
+        <td>{{ inv.student.username }}</td>
+        <td>{{ inv.amount }} {{ inv.currency }}</td>
+        <td>{{ inv.get_status_display }}</td>
+        <td>{{ inv.due_date|default:"—" }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">Нет счетов</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
+

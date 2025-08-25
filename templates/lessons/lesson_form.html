@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Новое занятие{% endblock %}
+{% block content %}
+  <div class="card" style="max-width: 640px;">
+    <h2>Создать занятие</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить</button>
+    </form>
+  </div>
+{% endblock %}
+
