@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Кабинет родителя{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Дети</h2>
+    <ul>
+      {% for c in children %}
+        <li>{{ c.username }}</li>
+      {% empty %}
+        <li>Нет связей родитель-ребенок</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Счета</h2>
+    <ul>
+      {% for inv in invoices %}
+        <li>#{{ inv.id }} — {{ inv.student.username }} — {{ inv.amount }} {{ inv.currency }} ({{ inv.get_status_display }})</li>
+      {% empty %}
+        <li>Нет счетов</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Ближайшие занятия</h2>
+    <ul>
+      {% for l in upcoming_lessons %}
+        <li>{{ l.student.username }}: {{ l.subject.name }} — {{ l.scheduled_at|date:"d.m.Y H:i" }}</li>
+      {% empty %}
+        <li>Нет занятий</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+

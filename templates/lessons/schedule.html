@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Расписание{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Расписание</h2>
+    <table>
+      <tr><th>Дата</th><th>Предмет</th><th>Преподаватель</th><th>Ученик</th><th>Статус</th></tr>
+      {% for l in lessons %}
+      <tr>
+        <td>{{ l.scheduled_at|date:"d.m.Y H:i" }}</td>
+        <td>{{ l.subject.name }}</td>
+        <td>{{ l.tutor.username }}</td>
+        <td>{{ l.student.username }}</td>
+        <td>{{ l.get_status_display }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">Нет занятий</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
+

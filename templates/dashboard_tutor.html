@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Кабинет преподавателя{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Ближайшие занятия</h2>
+    <table>
+      <tr><th>Предмет</th><th>Ученик</th><th>Дата</th><th>Статус</th></tr>
+      {% for l in upcoming_lessons %}
+        <tr>
+          <td>{{ l.subject.name }}</td>
+          <td>{{ l.student.username }}</td>
+          <td>{{ l.scheduled_at|date:"d.m.Y H:i" }}</td>
+          <td>{{ l.get_status_display }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">Нет занятий</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="card">
+    <h2>Недавние задания</h2>
+    <ul>
+      {% for a in recent_assignments %}
+        <li>{{ a.title }} → {{ a.student.username }} (до {{ a.due_date|default:"—" }})</li>
+      {% empty %}
+        <li>Нет заданий</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
